@@ -12,6 +12,10 @@ app.use(bodyParser.json());
 
 app.use(cors());
 
+app.get('/', async (req, res) => {
+  res.send('Server working');
+})
+
 // Endpoint for sending emails
 app.post('/send-email', async (req, res) => {
   const { user, owner } = req.body;
