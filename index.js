@@ -2,10 +2,10 @@ const express = require('express');
 const nodemailer = require('nodemailer');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-require('dotenv').config();
+
+const config = require('./config');
 
 const app = express();
-const port = 3001; // You can change the port if needed
 
 // Middleware for parsing JSON requests
 app.use(bodyParser.json());
@@ -23,8 +23,8 @@ app.post('/send-email', async (req, res) => {
   const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-      user: process.env.AUTH_EMAIL,
-      pass: process.env.AUTH_PASS,
+      user: config.AUTH_EMAIL,
+      pass: config.AUTH_PASS,
     },
   });
 
@@ -54,6 +54,6 @@ app.post('/send-email', async (req, res) => {
 });
 
 // Start server
-app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
+app.listen(config.port, () => {
+  console.log(`Server is running on port ${config.PORT}`);
 });
